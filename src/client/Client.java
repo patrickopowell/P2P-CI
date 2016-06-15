@@ -57,29 +57,32 @@ public class Client {
 		 OutputStream outToServer = null;
 		try {
 			outToServer = PClient.getOutputStream();
-		} catch (IOException e1) {
+		} 
+		catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
          DataOutputStream out = new DataOutputStream(outToServer);
          try {
-			out.writeUTF("Hello from "
-			              + PClient.getLocalSocketAddress());
-		} catch (IOException e) {
+			out.writeUTF("Hello from " + PClient.getLocalSocketAddress());
+		} 
+        catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
          InputStream inFromServer = null;
 		try {
 			inFromServer = PClient.getInputStream();
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
          DataInputStream in = new DataInputStream(inFromServer);
          try {
 			System.out.println("Server says " + in.readUTF());
-		} catch (IOException e) {
+		}
+        catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
