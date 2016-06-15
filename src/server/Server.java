@@ -10,8 +10,9 @@ import java.net.SocketTimeoutException;
 public class Server {
 	
 	String[] peerList;
+	String[] rfcList;
 	int[] portList;
-	
+		
 	ServerSocket PServer = null;
 	
 	public Server() {
@@ -32,8 +33,7 @@ public class Server {
 	    }*/
 	}
 	
-	public void run()
-	   {
+	public void run() {
 	      while(true)
 	      {
 	         try
@@ -51,7 +51,7 @@ public class Server {
 	            
 	            DataOutputStream out = new DataOutputStream(pSocket.getOutputStream());
 	            
-	            out.writeUTF("Thank you for connecting to "
+	            out.writeUTF("Closing connection to "
 	              + pSocket.getLocalSocketAddress() + "\nGoodbye!");
 	            
 	            pSocket.close();
@@ -65,7 +65,21 @@ public class Server {
 	            break;
 	         }
 	      }
-	   }
+	}
+	
+	public void addRFC(String msg) {
+		char parser = '\n';
+		int arrayCount = peerList.length;
+		String peer = msg.substring(0, msg.indexOf(parser));
+		msg = msg.substring(msg.indexOf(parser) + 1);
+		String rfc = msg.substring(0, msg.indexOf(parser));
+		msg = msg.substring(msg.indexOf(parser) + 1);
+		String port = msg.substring(0, msg.indexOf(parser));
+		
+		peerList[arrayCount] = peer;
+		rfcList[arrayCount] = rfc;
+		portList[arrayCount] = Integer.parseInt(port);
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
