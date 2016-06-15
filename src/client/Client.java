@@ -12,10 +12,10 @@ public class Client {
 		
 	    Socket PClient;
 	    try {
-	           PClient = new Socket("Machine name", PortNumber);
+	           PClient = new Socket("localhost", PortNumber);
 	    }
 	    catch (IOException e) {
-	        System.out.println(e);
+	        System.out.println(e + "PClient failed");
 	    }
 	    
 	    ServerSocket PServer = null;
@@ -23,7 +23,7 @@ public class Client {
 	       PServer = new ServerSocket(PortNumber);
 	        }
 	        catch (IOException e) {
-	           System.out.println(e);
+	           System.out.println(e + "PServer socket failed");
 	        }
 	    
 	    Socket clientSocket = null;
@@ -31,7 +31,7 @@ public class Client {
 	       clientSocket = PServer.accept();
 	        }
 	    catch (IOException e) {
-	       System.out.println(e);
+	       System.out.println(e + "PServer accept failed");
 	    }
 	}
 	
