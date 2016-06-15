@@ -41,20 +41,20 @@ public class Server {
 	            System.out.println("Waiting for client on port " +
 	            PServer.getLocalPort() + "...");
 	            
-	            Socket server = PServer.accept();
+	            Socket pSocket = PServer.accept();
 	            System.out.println("Just connected to "
-	                  + server.getRemoteSocketAddress());
+	                  + pSocket.getRemoteSocketAddress());
 	            
-	            DataInputStream in = new DataInputStream(server.getInputStream());
+	            DataInputStream in = new DataInputStream(pSocket.getInputStream());
 	            
 	            System.out.println(in.readUTF());
 	            
-	            DataOutputStream out = new DataOutputStream(server.getOutputStream());
+	            DataOutputStream out = new DataOutputStream(pSocket.getOutputStream());
 	            
 	            out.writeUTF("Thank you for connecting to "
-	              + server.getLocalSocketAddress() + "\nGoodbye!");
+	              + pSocket.getLocalSocketAddress() + "\nGoodbye!");
 	            
-	            server.close();
+	            pSocket.close();
 	         }catch(SocketTimeoutException s)
 	         {
 	            System.out.println("Socket timed out!");

@@ -70,15 +70,15 @@ public class Client {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-         InputStream inFromServer = null;
+         InputStream serverStream = null;
 		try {
-			inFromServer = PClient.getInputStream();
+			serverStream = PClient.getInputStream();
 		}
 		catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-         DataInputStream in = new DataInputStream(inFromServer);
+         DataInputStream in = new DataInputStream(serverStream);
          try {
 			System.out.println("Server says " + in.readUTF());
 		}
