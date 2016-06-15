@@ -14,7 +14,7 @@ public class Client {
 
 	public Client() {
 		
-		int PortNumber = 15000;
+		int PortNumber = 7734;
 		
 		PClient = null;
 	    try {

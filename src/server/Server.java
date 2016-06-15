@@ -15,7 +15,7 @@ public class Server {
 	ServerSocket PServer = null;
 	
 	public Server() {
-		int PortNumber = 15000;
+		int PortNumber = 7734;
 	    try {
 	       PServer = new ServerSocket(PortNumber);
 	        }
