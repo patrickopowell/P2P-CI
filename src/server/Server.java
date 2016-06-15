@@ -17,7 +17,7 @@ public class Server {
 	       PServer = new ServerSocket(PortNumber);
 	        }
 	        catch (IOException e) {
-	           System.out.println(e + "PServer socket failed");
+	           System.out.println(e + " PServer socket failed");
 	        }
 	    
 	    Socket clientSocket = null;
@@ -25,7 +25,7 @@ public class Server {
 	       clientSocket = PServer.accept();
 	        }
 	    catch (IOException e) {
-	       System.out.println(e + "PServer accept failed");
+	       System.out.println(e + " PServer accept failed");
 	    }
 	}
 
