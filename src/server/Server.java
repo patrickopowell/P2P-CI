@@ -6,6 +6,9 @@ import java.net.Socket;
 
 public class Server {
 	
+	String[] peerList;
+	String[] addrList;
+	
 	public Server() {
 		int PortNumber = 15000;
 		
