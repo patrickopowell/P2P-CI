@@ -8,7 +8,7 @@ public class Client {
 
 	public Client() {
 		
-		int PortNumber = 15000;
+		int PortNumber = 15001;
 		
 	    Socket PClient;
 	    try {
