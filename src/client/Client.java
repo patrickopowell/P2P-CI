@@ -1,6 +1,7 @@
 package client;
 
 import java.io.IOException;
+import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Client {
@@ -15,6 +16,22 @@ public class Client {
 	    }
 	    catch (IOException e) {
 	        System.out.println(e);
+	    }
+	    
+	    ServerSocket PServer = null;
+	    try {
+	       PServer = new ServerSocket(PortNumber);
+	        }
+	        catch (IOException e) {
+	           System.out.println(e);
+	        }
+	    
+	    Socket clientSocket = null;
+	    try {
+	       clientSocket = PServer.accept();
+	        }
+	    catch (IOException e) {
+	       System.out.println(e);
 	    }
 	}
 	

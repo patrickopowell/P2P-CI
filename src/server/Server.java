@@ -7,7 +7,7 @@ import java.net.Socket;
 public class Server {
 	
 	String[] peerList;
-	String[] addrList;
+	int[] portList;
 	
 	public Server() {
 		int PortNumber = 15000;
