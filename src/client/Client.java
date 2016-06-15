@@ -5,12 +5,14 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Client {
+	
+    Socket PClient;
 
 	public Client() {
 		
 		int PortNumber = 15000;
 		
-	    Socket PClient;
+		PClient = null;
 	    try {
 	           PClient = new Socket("localhost", PortNumber);
 	    }
@@ -21,6 +23,7 @@ public class Client {
 	    PortNumber = 15001;
 	    
 	    ServerSocket PServer = null;
+	    
 	    try {
 	       PServer = new ServerSocket(PortNumber);
 	        }
@@ -37,9 +40,20 @@ public class Client {
 	    }
 	}
 	
+	public void closeClient() {
+		try {
+			PClient.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		new Client();
+		Client client = new Client();
+	    
+	    client.closeClient();
 	}
 
 }
