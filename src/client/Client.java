@@ -42,14 +42,17 @@ public class Client {
 		    try {
 		       PServer = new ServerSocket(PortNumber);
 		        }
-		        catch (IOException e) {
-		           System.out.println(e + " PServer socket failed");
-		        }
+		    catch (IOException e) {
+		    	System.out.println(e + " PServer socket failed");
+		    }
+		    
+		    System.out.println("Waiting for client on port " +
+		            PServer.getLocalPort() + "...");
 		    
 		    Socket clientSocket = null;
 		    try {
 		       clientSocket = PServer.accept();
-		        }
+		    }
 		    catch (IOException e) {
 		       System.out.println(e + " PServer accept failed");
 		    }
