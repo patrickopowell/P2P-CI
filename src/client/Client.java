@@ -132,6 +132,7 @@ public class Client {
 		
 		String msg = "ADD 2345\n15001\n";//args[0];
 		char parser = '\n';
+		boolean closed = false;
 		
 		String method = msg.substring(0, msg.indexOf(' '));
 			    
@@ -144,6 +145,9 @@ public class Client {
 			client.send(method,rfc,port);
 	    	
 	    	client.runP2P();
+	    	
+	    	client.closeClient();
+	    	closed = true;
 	    }
 	    else if (method.equals("LOOKUP")) {
 	    	msg = msg.substring(msg.indexOf(' ') + 1);
@@ -154,7 +158,7 @@ public class Client {
 	    	client.getList();
 	    }
 	    
-	    client.closeClient();
+	    if (!closed) client.closeClient();
 	}
 
 }
