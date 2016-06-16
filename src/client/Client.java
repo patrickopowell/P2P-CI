@@ -136,8 +136,10 @@ public class Client {
 		String msg = "ADD 2345\n15001\n";//args[0];
 		char parser = '\n';
 		boolean closed = false;
+		String method = null;
 		
-		String method = msg.substring(0, msg.indexOf(' '));
+		if (!msg.equals("LIST")) method = msg.substring(0, msg.indexOf(' '));
+		else method = msg;
 			    
 	    if (method.equals("ADD")) {
 	    	msg = msg.substring(msg.indexOf(' ') + 1);
