@@ -29,7 +29,6 @@ public class Client {
 		try {
 			PClient.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -45,9 +44,6 @@ public class Client {
 		    catch (IOException e) {
 		    	System.out.println(e + " PServer socket failed");
 		    }
-		    
-		    System.out.println("Waiting for client on port " +
-		            PServer.getLocalPort() + "...");
 		    
 		    Socket clientSocket = null;
 		    try {
@@ -65,7 +61,6 @@ public class Client {
 			outToServer = PClient.getOutputStream();
 		} 
 		catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
          DataOutputStream out = new DataOutputStream(outToServer);
@@ -73,7 +68,6 @@ public class Client {
 			out.writeUTF(method + " " + rfc + "\n" + port);
 		} 
         catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
          InputStream serverStream = null;
@@ -81,7 +75,6 @@ public class Client {
 			serverStream = PClient.getInputStream();
 		}
 		catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
          DataInputStream in = new DataInputStream(serverStream);
@@ -89,7 +82,6 @@ public class Client {
 			System.out.println("Server says " + in.readUTF());
 		}
         catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -100,7 +92,6 @@ public class Client {
 			outToServer = PClient.getOutputStream();
 		} 
 		catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
          DataOutputStream out = new DataOutputStream(outToServer);
@@ -108,7 +99,6 @@ public class Client {
 			out.writeUTF("LIST");
 		} 
         catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
          InputStream serverStream = null;
@@ -116,7 +106,6 @@ public class Client {
 			serverStream = PClient.getInputStream();
 		}
 		catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
          DataInputStream in = new DataInputStream(serverStream);
@@ -124,16 +113,14 @@ public class Client {
 			System.out.println(in.readUTF());
 		}
         catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		Client client = new Client();
 		
-		String msg = "ADD 2345\n15001\n";//args[0];
+		String msg = args[0];//"ADD 2345\n15000";
 		char parser = '\n';
 		boolean closed = false;
 		String method = null;
@@ -145,7 +132,7 @@ public class Client {
 	    	msg = msg.substring(msg.indexOf(' ') + 1);
 			String rfc = msg.substring(0, msg.indexOf(parser));
 			msg = msg.substring(msg.indexOf(parser) + 1);
-			String port = msg.substring(0, msg.indexOf(parser));
+			String port = msg;
 			
 			client.send(method,rfc,port);
 	    	

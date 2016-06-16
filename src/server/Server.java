@@ -31,14 +31,6 @@ public class Server {
 	    portList = new int[100];
 	    
 	    arrayCount = 0;
-	    
-	    /*Socket clientSocket = null;
-	    try {
-	       clientSocket = PServer.accept();
-	        }
-	    catch (IOException e) {
-	       System.out.println(e + " PServer accept failed");
-	    }*/
 	}
 	
 	public void run() {
@@ -46,12 +38,7 @@ public class Server {
 	      {
 	         try
 	         {
-	            System.out.println("Waiting for client on port " +
-	            PServer.getLocalPort() + "...");
-	            
 	            Socket pSocket = PServer.accept();
-	            System.out.println("Just connected to "
-	                  + pSocket.getRemoteSocketAddress());
 	            
 	            DataInputStream in = new DataInputStream(pSocket.getInputStream());
 	            
@@ -63,6 +50,8 @@ public class Server {
 	            
 	            String method = getMethod(msg);
 	            
+	            if (!method.equals("LIST")) msg = msg.substring(msg.indexOf(' ')+1);
+	            
 	            if (method.equals("LOOKUP")) {
 	            	if (getRFC(msg) == null) out.writeUTF("RFC not found\n");	            
 	            }
@@ -71,7 +60,7 @@ public class Server {
 	            	out.writeUTF("RFC added\n");
 	            }
 	            else if (method.equals("LIST")) {
-	            	out.writeUTF("List:\n" + getList());
+	            	out.writeUTF("RFCs Available:\n" + getList());
 	            }
 	            
 	            out.writeUTF("Closing connection to "
@@ -97,8 +86,7 @@ public class Server {
 	
 	public void addRFC(String peer, String msg) {
 		char parser = '\n';
-		//String peer = msg.substring(0, msg.indexOf(parser));
-		//msg = msg.substring(msg.indexOf(parser) + 1);
+		
 		String rfc = msg.substring(0, msg.indexOf(parser));
 		msg = msg.substring(msg.indexOf(parser) + 1);
 		String port = msg;//.substring(0, msg.indexOf(parser));
@@ -111,9 +99,9 @@ public class Server {
 	}
 	
 	public String getRFC(String msg) {
-		for (int i=0; i<=arrayCount;i++) {
+		for (int i=0; i<arrayCount;i++) {
 			if (rfcList[i].equals(msg)) {
-				String ret = peerList[i] + "\n" + portList; 
+				String ret = peerList[i] + "\n" + portList[i]; 
 				return ret;
 			}
 		}
@@ -122,7 +110,7 @@ public class Server {
 	
 	public String getList() {
 		String list = "";
-		for (int i=0; i<=arrayCount;i++) {
+		for (int i=0; i<arrayCount;i++) {
 			list += peerList[i] + " " + rfcList[i] + " " + portList[i] + "\n";
 		}
 		
@@ -131,7 +119,6 @@ public class Server {
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		Server server = new Server();
 		
 		server.run();
