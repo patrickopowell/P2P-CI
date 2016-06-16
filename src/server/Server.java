@@ -47,6 +47,8 @@ public class Server {
 	            
 	            DataInputStream in = new DataInputStream(pSocket.getInputStream());
 	            
+	            String msg = in.readUTF();
+	            
 	            System.out.println(in.readUTF());
 	            
 	            DataOutputStream out = new DataOutputStream(pSocket.getOutputStream());
@@ -55,11 +57,11 @@ public class Server {
 	              + pSocket.getLocalSocketAddress() + "\nGoodbye!");
 	            
 	            pSocket.close();
-	         }catch(SocketTimeoutException s)
+	         } catch(SocketTimeoutException s)
 	         {
 	            System.out.println("Socket timed out!");
 	            break;
-	         }catch(IOException e)
+	         } catch(IOException e)
 	         {
 	            e.printStackTrace();
 	            break;
@@ -79,6 +81,16 @@ public class Server {
 		peerList[arrayCount] = peer;
 		rfcList[arrayCount] = rfc;
 		portList[arrayCount] = Integer.parseInt(port);
+	}
+	
+	public String getRFC(String msg) {
+		for (int i=0; i<peerList.length;i++) {
+			if (rfcList[i].equals(msg)) {
+				String ret = peerList[i] + "\n" + portList; 
+				return ret;
+			}
+		}
+		return null;
 	}
 
 	public static void main(String[] args) {
