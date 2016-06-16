@@ -56,8 +56,8 @@ public class Client {
 	    }
 	}
 	
-	public void send(String rfc, String port) {
-		 OutputStream outToServer = null;
+	public void send(String method, String rfc, String port) {
+		OutputStream outToServer = null;
 		try {
 			outToServer = PClient.getOutputStream();
 		} 
@@ -67,7 +67,7 @@ public class Client {
 		}
          DataOutputStream out = new DataOutputStream(outToServer);
          try {
-			out.writeUTF(rfc + " " + port);
+			out.writeUTF(method + " " + rfc + "\n" + port);
 		} 
         catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -91,6 +91,41 @@ public class Client {
 		}
 	}
 	
+	public void getList() {
+		OutputStream outToServer = null;
+		try {
+			outToServer = PClient.getOutputStream();
+		} 
+		catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+         DataOutputStream out = new DataOutputStream(outToServer);
+         try {
+			out.writeUTF("LIST");
+		} 
+        catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+         InputStream serverStream = null;
+		try {
+			serverStream = PClient.getInputStream();
+		}
+		catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+         DataInputStream in = new DataInputStream(serverStream);
+         try {
+			System.out.println(in.readUTF());
+		}
+        catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Client client = new Client();
@@ -106,15 +141,17 @@ public class Client {
 			msg = msg.substring(msg.indexOf(parser) + 1);
 			String port = msg.substring(0, msg.indexOf(parser));
 			
-			client.send(rfc,port);
+			client.send(method,rfc,port);
 	    	
 	    	client.runP2P();
 	    }
 	    else if (method.equals("LOOKUP")) {
-	    	
+	    	msg = msg.substring(msg.indexOf(' ') + 1);
+			String rfc = msg.substring(0, msg.indexOf(parser));
+	    	client.send(method, rfc, Integer.toString(15000));
 	    }
 	    else if (method.equals("LIST")) {
-	    	
+	    	client.getList();
 	    }
 	    
 	    client.closeClient();
