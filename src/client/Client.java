@@ -8,6 +8,11 @@ import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/*
+ * @author Patrick Powell (000815382)
+ * @author Stevie Brinson (001068791)
+ */
+
 public class Client {
 	
     Socket PClient;

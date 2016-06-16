@@ -7,6 +7,11 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 
+/*
+ * @author Patrick Powell (000815382)
+ * @author Stevie Brinson (001068791)
+ */
+
 public class Server {
 	
 	String[] peerList;
