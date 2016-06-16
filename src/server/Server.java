@@ -55,7 +55,9 @@ public class Server {
 	            
 	            String method = getMethod(msg);
 	            
-	            if (getRFC(msg) == null) out.writeUTF("RFC not found\n");	            
+	            if (method.equals("LOOKUP")) {
+	            	if (getRFC(msg) == null) out.writeUTF("RFC not found\n");	            
+	            }
 	            
 	            out.writeUTF("Closing connection to "
 	              + pSocket.getLocalSocketAddress() + "\nGoodbye!");
