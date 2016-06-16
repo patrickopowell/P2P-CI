@@ -23,25 +23,6 @@ public class Client {
 	    catch (IOException e) {
 	        System.out.println(e + " PClient failed");
 	    }
-	    
-	    /*PortNumber = 15001;
-	    
-	    ServerSocket PServer = null;
-	    
-	    try {
-	       PServer = new ServerSocket(PortNumber);
-	        }
-	        catch (IOException e) {
-	           System.out.println(e + " PServer socket failed");
-	        }
-	    
-	    Socket clientSocket = null;
-	    try {
-	       clientSocket = PServer.accept();
-	        }
-	    catch (IOException e) {
-	       System.out.println(e + " PServer accept failed");
-	    }*/
 	}
 	
 	public void closeClient() {
@@ -53,7 +34,29 @@ public class Client {
 		}
 	}
 	
-	public void send() {
+	public void runP2P() {
+		int PortNumber = 15000;
+	    
+	    ServerSocket PServer = null;
+	    while(true) {
+		    try {
+		       PServer = new ServerSocket(PortNumber);
+		        }
+		        catch (IOException e) {
+		           System.out.println(e + " PServer socket failed");
+		        }
+		    
+		    Socket clientSocket = null;
+		    try {
+		       clientSocket = PServer.accept();
+		        }
+		    catch (IOException e) {
+		       System.out.println(e + " PServer accept failed");
+		    }
+	    }
+	}
+	
+	public void send(String rfc, String port) {
 		 OutputStream outToServer = null;
 		try {
 			outToServer = PClient.getOutputStream();
@@ -64,7 +67,7 @@ public class Client {
 		}
          DataOutputStream out = new DataOutputStream(outToServer);
          try {
-			out.writeUTF("Hello from " + PClient.getLocalSocketAddress());
+			out.writeUTF(rfc + " " + port);
 		} 
         catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -92,7 +95,27 @@ public class Client {
 		// TODO Auto-generated method stub
 		Client client = new Client();
 		
-		client.send();
+		String msg = "ADD 2345\n15001\n";//args[0];
+		char parser = '\n';
+		
+		String method = msg.substring(0, msg.indexOf(' '));
+			    
+	    if (method.equals("ADD")) {
+	    	msg = msg.substring(msg.indexOf(' ') + 1);
+			String rfc = msg.substring(0, msg.indexOf(parser));
+			msg = msg.substring(msg.indexOf(parser) + 1);
+			String port = msg.substring(0, msg.indexOf(parser));
+			
+			client.send(rfc,port);
+	    	
+	    	client.runP2P();
+	    }
+	    else if (method.equals("LOOKUP")) {
+	    	
+	    }
+	    else if (method.equals("LIST")) {
+	    	
+	    }
 	    
 	    client.closeClient();
 	}
