@@ -53,6 +53,8 @@ public class Server {
 	            
 	            DataOutputStream out = new DataOutputStream(pSocket.getOutputStream());
 	            
+	            if (getRFC(msg) == null) out.writeUTF("RFC not found\n");
+	            
 	            out.writeUTF("Closing connection to "
 	              + pSocket.getLocalSocketAddress() + "\nGoodbye!");
 	            
