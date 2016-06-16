@@ -53,7 +53,9 @@ public class Server {
 	            
 	            DataOutputStream out = new DataOutputStream(pSocket.getOutputStream());
 	            
-	            if (getRFC(msg) == null) out.writeUTF("RFC not found\n");
+	            String method = getMethod(msg);
+	            
+	            if (getRFC(msg) == null) out.writeUTF("RFC not found\n");	            
 	            
 	            out.writeUTF("Closing connection to "
 	              + pSocket.getLocalSocketAddress() + "\nGoodbye!");
@@ -69,6 +71,10 @@ public class Server {
 	            break;
 	         }
 	      }
+	}
+	
+	public String getMethod(String msg) {
+		return msg.substring(0, msg.indexOf(' '));
 	}
 	
 	public void addRFC(String msg) {
