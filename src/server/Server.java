@@ -58,6 +58,13 @@ public class Server {
 	            if (method.equals("LOOKUP")) {
 	            	if (getRFC(msg) == null) out.writeUTF("RFC not found\n");	            
 	            }
+	            else if (method.equals("ADD")) {
+	            	addRFC(msg);
+	            	out.writeUTF("RFC added\n");
+	            }
+	            else if (method.equals("LIST")) {
+	            	out.writeUTF(getList());
+	            }
 	            
 	            out.writeUTF("Closing connection to "
 	              + pSocket.getLocalSocketAddress() + "\nGoodbye!");
@@ -101,6 +108,16 @@ public class Server {
 			}
 		}
 		return null;
+	}
+	
+	public String getList() {
+		String list = "";
+		for (int i=0; i<peerList.length;i++) {
+			list += peerList[i] + " " + rfcList[i] + " " + portList[i] + "\n";
+		}
+		
+		if (list.length() < 1) return "List is empty.\n";
+		else return list;
 	}
 
 	public static void main(String[] args) {
