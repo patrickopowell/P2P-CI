@@ -49,7 +49,7 @@ public class Server {
 	            
 	            String msg = in.readUTF();
 	            
-	            System.out.println(in.readUTF());
+	            System.out.println(msg);
 	            
 	            DataOutputStream out = new DataOutputStream(pSocket.getOutputStream());
 	            
