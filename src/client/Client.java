@@ -79,7 +79,7 @@ public class Client {
 		}
          DataInputStream in = new DataInputStream(serverStream);
          try {
-			System.out.println("Server says " + in.readUTF());
+			System.out.println(in.readUTF());
 		}
         catch (IOException e) {
 			e.printStackTrace();
@@ -120,7 +120,7 @@ public class Client {
 	public static void main(String[] args) {
 		Client client = new Client();
 		
-		String msg = args[0];//"ADD 2345\n15000";
+		String msg = "ADD 2345\n15000";
 		char parser = '\n';
 		boolean closed = false;
 		String method = null;
