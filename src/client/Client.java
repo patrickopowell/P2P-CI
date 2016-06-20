@@ -42,6 +42,9 @@ public class Client {
 		int PortNumber = 15000;
 	    
 	    ServerSocket PServer = null;
+	    
+	    System.out.println("Waiting for peer connection");
+	    
 	    while(true) {
 		    try {
 		       PServer = new ServerSocket(PortNumber);
@@ -125,7 +128,7 @@ public class Client {
 	public static void main(String[] args) {
 		Client client = new Client();
 		
-		String msg = "ADD 2345\n15000";
+		String msg = "ADD RFC2345\n15000";//args[0];
 		char parser = '\n';
 		boolean closed = false;
 		String method = null;

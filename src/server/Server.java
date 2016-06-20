@@ -62,7 +62,7 @@ public class Server {
 	            }
 	            else if (method.equals("ADD")) {
 	            	addRFC(pSocket.getRemoteSocketAddress().toString(),msg);
-	            	out.writeUTF("RFC added\n");
+	            	out.writeUTF("RFC added\n" + getList());
 	            }
 	            else if (method.equals("LIST")) {
 	            	out.writeUTF("RFCs Available:\n" + getList());
