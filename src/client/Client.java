@@ -128,7 +128,8 @@ public class Client {
 	public static void main(String[] args) {
 		Client client = new Client();
 		
-		String msg = "ADD RFC2345\n15000";//args[0];
+		String msg = "LIST";
+		if(args.length > 0) msg = args[0];
 		char parser = '\n';
 		boolean closed = false;
 		String method = null;
